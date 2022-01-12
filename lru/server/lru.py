@@ -1,9 +1,10 @@
 import sys
+import argparse
 from collections import defaultdict
 
 
 class LRUCache:
-    def __init__(self, size=sys.maxsize) -> None:
+    def __init__(self, size: int = sys.maxsize):
         self.size = size
         self.table = defaultdict(None)
         self.stack = []
@@ -13,8 +14,12 @@ class LRUCache:
         self.__updateLru(key)
 
     def get(self, key):
-        result = self.table[key]
-        self.__updateLru(key)
+        result = None
+        try:
+            result = self.table[key]
+            self.__updateLru(key)
+        except:
+            pass
         return result
 
     def delete(self, key):
@@ -28,10 +33,15 @@ class LRUCache:
         self.table = defaultdict()
 
     def __updateLru(self, key):
-        if len(self.table.keys()) >= self.size:
-            self.table.pop(self.stack[0], None)
-            self.stack.pop(0)  # remove LRU
-            self.stack.append(key)  # Add MRU
+        if len(self.table.keys()) > self.size:
+            # self.table.pop(self.stack[0], None)
+            try:
+                del self.table[self.stack[0]]
+                self.table.pop(self.stack[0], None)
+                self.stack.pop(0)  # remove LRU value
+                self.stack.append(key)  # Add MRU value
+            except:
+                pass
         else:
             try:
                 self.stack.remove(key)
@@ -41,8 +51,6 @@ class LRUCache:
 
 
 if __name__ == "__main__":
-    # Code block below runs LRU Cache in offline mode.
-    import argparse
 
     parser = argparse.ArgumentParser(description="LRU Cache Application")
 
@@ -50,36 +58,39 @@ if __name__ == "__main__":
         "-s",
         "--size",
         help="lru max size; \
-                Tells the app the maximum size to initialize LRU cache with.",
+                Tells the app the size of LRU.",
     )
 
     args = vars(parser.parse_args())
-    maxSize = args["size"]
+    maxSize = int(args["size"])
 
     lruCache = LRUCache(maxSize)
 
     while True:
         try:
             userInput = input(
-                "Please enter desired command; \
-                \n put <key> <value>\
-                \n get <key>\
-                \n delete <key>\
-                \n reset. \n"
+                'Please enter desired command; \
+               \nAvailable Commands: \
+               \nput "<key>" "<value>"\
+               \nget "<key>"\
+               \ndelete "<key>"\
+               \nreset. \n'
             )
             args = userInput.split(" ")
             command = args[0]
             if command == "put":
-                key = args[1]
-                value = args[2]
+                key = int(args[1])
+                value = int(args[2])
                 lruCache.put(key, value)
             elif command == "get":
-                key = args[1]
-                payload = {"key": key}
-                result = lruCache.get(key)
-                print("The value of {} is {}".format(key, result))
+                key = int(args[1])
+                value = lruCache.get(key)
+                if value == None:
+                    print('No value exists for key : "{}".'.format(key))
+                else:
+                    print("The value of {} is {}".format(key, value))
             elif command == "delete":
-                key = args[1]
+                key = int(args[1])
                 lruCache.delete(key)
             elif command == "reset":
                 lruCache.reset()
