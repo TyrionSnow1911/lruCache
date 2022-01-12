@@ -1,11 +1,8 @@
 # Environment
 
 - Angular CLI: 12.2.1
-- Node: 12.22.7
-- Package Manager: npm 7.20.5
 - OS: linux x64
 - https://codebots.com/docs/ubuntu-18-04-virtual-machine-setup
-- https://mvthanoshan.medium.com/how-to-setup-angular-on-ubuntu-14633ee93a57
 
 # Project Dependencies
 
@@ -24,7 +21,7 @@ cd ~
 git clone https://github.com/TyrionSnow1911/lruCache.git
 ```
 
-# 2. Run lru
+# 2. Run LRU
 
 ```
 cd ~/lruCache/src/server
@@ -40,7 +37,7 @@ cd ~
 git clone https://github.com/TyrionSnow1911/lruCache.git
 ```
 
-# 2. Start Backend Server
+# 2. Start Server
 
 ```
 cd ~/lruCache/src/server
@@ -55,7 +52,7 @@ cd ~/lruCache/src/client
 python3 client.py
 ```
 
-# Unit Testing
+# Unit Testing Server
 
 ```
 cd ~/lruCache/src/server/test
