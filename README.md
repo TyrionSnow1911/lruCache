@@ -25,7 +25,7 @@ git clone https://github.com/TyrionSnow1911/lruCache.git
 
 ```
 cd ~/lruCache/src/server
-python3 lru.py
+python3 lru.py -s <size of lru>
 ```
 
 # Run LRU via Client-Server CLI interface.

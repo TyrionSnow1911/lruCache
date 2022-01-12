@@ -6,12 +6,12 @@ if __name__ == "__main__":
     while True:
         try:
             userInput = input(
-                'Please enter desired command; \
-               \nAvailable Commands: \
-               \nput "<key>" "<value>"\
-               \nget "<key>"\
-               \ndelete "<key>"\
-               \nreset. \n'
+                'Please enter desired command; Available Commands: \
+               \n- put "<key>" "<value>"\
+               \n- get "<key>"\
+               \n- delete "<key>"\
+               \n- reset\
+               \n>'
             )
             args = userInput.split(" ")
             command = args[0]

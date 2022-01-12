@@ -15,38 +15,31 @@ class LRUCache:
 
     def get(self, key):
         result = None
-        try:
+        if key in self.table.keys():
             result = self.table[key]
-            self.__updateLru(key)
-        except:
-            pass
+        self.__updateLru(key)
         return result
 
     def delete(self, key):
-        try:
+        if key in self.table.keys():
             self.table.pop(key, None)
+        if key in self.stack:
             self.stack.remove(key)
-        except:
-            pass  # no-op
 
     def reset(self):
         self.table = defaultdict()
 
     def __updateLru(self, key):
         if len(self.table.keys()) > self.size:
-            # self.table.pop(self.stack[0], None)
-            try:
+            if self.stack[0] in self.table.keys():
                 del self.table[self.stack[0]]
                 self.table.pop(self.stack[0], None)
-                self.stack.pop(0)  # remove LRU value
-                self.stack.append(key)  # Add MRU value
-            except:
-                pass
+                self.stack.pop(0)
+            self.stack.append(key)
+
         else:
-            try:
+            if key in self.stack:
                 self.stack.remove(key)
-            except:
-                pass
             self.stack.append(key)
 
 
@@ -69,12 +62,12 @@ if __name__ == "__main__":
     while True:
         try:
             userInput = input(
-                'Please enter desired command; \
-               \nAvailable Commands: \
-               \nput "<key>" "<value>"\
-               \nget "<key>"\
-               \ndelete "<key>"\
-               \nreset. \n'
+                'Please enter desired command; Available Commands: \
+               \n- put "<key>" "<value>"\
+               \n- get "<key>"\
+               \n- delete "<key>"\
+               \n- reset\
+               \n>'
             )
             args = userInput.split(" ")
             command = args[0]
