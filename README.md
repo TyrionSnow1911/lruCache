@@ -13,7 +13,7 @@
 
 # Usage Instructions
 
-- The lru can be run locally or through client CLI / server interface.
+- The lru can be run locally or through client/server CLI interface.
 
 # Running LRU locally
 
@@ -24,12 +24,14 @@ cd ~
 git clone https://github.com/TyrionSnow1911/lruCache.git
 ```
 
-# 2. run lru
+# 2. Run lru
 
 ```
 cd ~/lruCache/src/server
 python3 lru.py
 ```
+
+# Run LRU via Client-Server CLI interface.
 
 # 1. Clone repository
 
